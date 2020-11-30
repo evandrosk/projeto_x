@@ -1,0 +1,137 @@
+version: '3.1'
+services:
+
+    redis:
+        image: redis
+        container_name: redis
+        restart: always
+        ports:
+            - 6379:6379
+        networks:
+            redeinterna:
+                ipv4_address: 172.1.0.2
+
+    base_a:
+        image: mongo
+        container_name: mongodb
+        restart: always
+        ports:
+            - 27017:27017
+        volumes:
+          - ./database/base_a:/data/db
+        networks:
+            redeinterna:
+                ipv4_address: 172.1.0.3
+
+    base_b:
+        image: mongo
+        container_name: mongodb
+        restart: always
+        ports:
+            - 27017:27017
+        volumes:
+          - ./database/base_b:/data/db
+        networks:
+            redeinterna:
+                ipv4_address: 172.1.0.4
+
+    base_c:
+        image: mongo
+        container_name: mongodb
+        restart: always
+        ports:
+            - 27017:27017
+        volumes:
+          - ./database/base_c:/data/db
+        networks:
+            redeinterna:
+                ipv4_address: 172.1.0.5
+
+    auth:
+        build:
+            context: ./auth
+            dockerfile: Dockerfile
+        image: node
+        container_name: auth
+        ports:
+            - 3000:3000
+            - 9000:9000
+        dns:
+            - 8.8.8.8
+            - 1.1.1.1
+        volumes:
+            - ./auth:/var/node
+        depends_on:
+            - redis
+            - base_a
+            - base_b
+            - base_c
+        links:
+            - redis
+            - base_a
+            - base_b
+            - base_c
+        networks:
+            redeinterna:
+                ipv4_address: 172.1.0.6
+
+    services:
+        build:
+            context: ./services
+            dockerfile: Dockerfile
+        image: node
+        container_name: services
+        ports:
+            - 3001:3001
+            - 9001:9001
+        dns:
+            - 8.8.8.8
+            - 1.1.1.1
+        volumes:
+            - ./services:/var/node
+        depends_on:
+            - auth
+            - redis
+            - base_a
+            - base_b
+            - base_c
+        links:
+            - auth
+            - redis
+            - base_a
+            - base_b
+            - base_c
+        networks:
+            redeinterna:
+                ipv4_address: 172.1.0.7
+
+    front:
+        build:
+            context: ./front
+            dockerfile: Dockerfile
+        image: node
+        container_name: services
+        ports:
+            - 3001:3001
+            - 9001:9001
+        dns:
+            - 8.8.8.8
+            - 1.1.1.1
+        volumes:
+            - ./services:/var/node
+        depends_on:
+            - auth
+            - services
+        links:
+            - auth
+            - services
+        networks:
+            redeinterna:
+                ipv4_address: 172.1.0.8
+
+networks:
+    redeinterna:
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.1.0.0/16
