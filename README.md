@@ -24,26 +24,9 @@ O serviço consiste de duas aplicações em node, são elas:
 
   - Base A
 
-    - Colection: Usuarios
-      Dados para acesso:
-      ```
-        {
-          _id: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
-          uid: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
-          email: "fulano@dominio.com",
-          senha: "MD5.xxxxxxxxxxxxxxxxxxxxxxx.MD5"
-        }
-      ```
+    - Colection: users
 
-    - Colection: Dados
-      Com criptografia os dados seriam os seguintes:
-      ```
-        {
-          _id: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
-          data: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-        }
-      ```
-      Sem criptografia os dados seriam os seguintes:
+      Sem criptografia, os dados seriam os seguintes:
       ```
         {
           _id: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
@@ -85,16 +68,9 @@ O serviço consiste de duas aplicações em node, são elas:
 
   - Base B
 
-    - Colection: Dados
-      Com criptografia os dados seriam os seguintes:
-      ```
-        {
-          _id: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
-          uid: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
-          data: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-        }
-      ```
-      Sem criptografia os dados seriam os seguintes:
+    - Colection: user_data
+
+      Sem criptografia, os dados seriam os seguintes:
       ```
         {
           _id: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
@@ -161,45 +137,6 @@ O serviço consiste de duas aplicações em node, são elas:
           }
         }
       ```
-
-  - Base C
-
-  - Colection: consultas
-    Última consulta do CPF:
-    ```
-      {
-        _id: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
-        uid: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
-        origem: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
-        motivo: "CONSULTA CPF"
-      }
-    ```
-
-  - Colection: movimentacoes
-    Movimentação financeira nesse CPF:
-    ```
-      {
-        _id: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
-        uid: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
-        origem: "BANCO",
-        data: "2000-12-30 00:00:00",
-        motivo: "EMPRESTIMO",
-        valor: 1000
-      }
-    ```
-
-  - Colection: invoices
-    Dados relacionados a última compra com cartao de crédito vinculado ao CPF:
-    ```
-      {
-        _id: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
-        uid: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
-        origem: "BANCO",
-        data: "2020-11-30 00:00:00",
-        motivo: "FATURA",
-        valor: 10.01
-      }
-    ```
 
 ## Execução dos projetos
 
