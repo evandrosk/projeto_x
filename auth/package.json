@@ -26,6 +26,7 @@
 		"ip-range-check": "^0.2.0",
 		"jsonwebtoken": "^8.5.1",
 		"mongodb": "^3.4.1",
+		"mongoose": "^5.11.3",
 		"nodemailer": "^6.4.2",
 		"redis": "^2.8.0",
 		"require-dir": "^1.2.0",

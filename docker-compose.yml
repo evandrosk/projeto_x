@@ -13,7 +13,7 @@ services:
 
     base_a:
         image: mongo
-        container_name: mongodb
+        container_name: base_a
         restart: always
         ports:
             - 27017:27017
@@ -25,10 +25,10 @@ services:
 
     base_b:
         image: mongo
-        container_name: mongodb
+        container_name: base_b
         restart: always
         ports:
-            - 27017:27017
+            - 27018:27017
         volumes:
           - ./database/base_b:/data/db
         networks:
@@ -37,10 +37,10 @@ services:
 
     base_c:
         image: mongo
-        container_name: mongodb
+        container_name: base_c
         restart: always
         ports:
-            - 27017:27017
+            - 27019:27017
         volumes:
           - ./database/base_c:/data/db
         networks:
@@ -105,29 +105,29 @@ services:
             redeinterna:
                 ipv4_address: 172.1.0.7
 
-    front:
-        build:
-            context: ./front
-            dockerfile: Dockerfile
-        image: node
-        container_name: services
-        ports:
-            - 3001:3001
-            - 9001:9001
-        dns:
-            - 8.8.8.8
-            - 1.1.1.1
-        volumes:
-            - ./services:/var/node
-        depends_on:
-            - auth
-            - services
-        links:
-            - auth
-            - services
-        networks:
-            redeinterna:
-                ipv4_address: 172.1.0.8
+#    front:
+#        build:
+#            context: ./front
+#            dockerfile: Dockerfile
+#        image: node
+#        container_name: front
+#        ports:
+#            - 3001:3001
+#            - 9001:9001
+#        dns:
+#            - 8.8.8.8
+#            - 1.1.1.1
+#        volumes:
+#            - ./services:/var/node
+#        depends_on:
+#            - auth
+#            - services
+#        links:
+#            - auth
+#            - services
+#        networks:
+#            redeinterna:
+#                ipv4_address: 172.1.0.8
 
 networks:
     redeinterna:
