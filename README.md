@@ -13,7 +13,9 @@ O serviço consiste de duas aplicações em node, são elas:
     Prover e processar os dados solicitados via api rest;
   - Front:
     Prover um front que consome o Auth para gerar uma chave de acesso e efetivar as requisições ao Services para obter os dados;
+
     * Em função ao tempo previsto para o projeto, o front não será desenvolvido.
+
 
   ![Arquitetura](https://github.com/evandrosk/projeto_x/blob/master/services.png)
 
@@ -32,34 +34,22 @@ O serviço consiste de duas aplicações em node, são elas:
           _id: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
           data: {
             cpf: "00000000191",
-            nome: "Fulano Teste",
-            enderecos: [
-              {
-                atual: true,
-                rua: "Servidão Teste",
-                numero: 1,
-                complemento: "casa"
-                bairro: "Teste",
-                cidade: "Blumenau",
-                estado: "SC",
-                cep: 89000000
-              },
-              {
-                rua: "Servidão Teste",
-                numero: 2,
-                complemento: "apto 10"
-                bairro: "Teste",
-                cidade: "Blumenau",
-                estado: "SC",
-                cep: 89000000
-              }
-            ],
+            name: "Fulano Teste",
+            addresses: {
+              street: "Servidão Teste",
+              number: 1,
+              complement: "casa"
+              district: "Teste",
+              city: "Blumenau",
+              state: "SC",
+              postalcode: 89000000
+            },
             dividas: [
               {
-                ativa: true,
-                responsavel: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
-                motivo: "Divida Vencida",
-                valor: 1.01
+                active: true,
+                responsible: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
+                reason: "Divida Vencida",
+                value: 1.01
               }
             ]
           }
@@ -76,62 +66,71 @@ O serviço consiste de duas aplicações em node, são elas:
           _id: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
           uid: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
           data: {
-            nascimento: "1960-12-31",
-            enderecos: [
+            birth: "1960-12-31",
+            addresses: [
               {
-                atual: true,
-                rua: "Servidão Teste",
-                numero: 1,
-                complemento: "casa"
-                bairro: "Teste",
-                cidade: "Blumenau",
-                estado: "SC",
-                cep: 89000000
+                active: true,
+                street: "Servidão Teste",
+                number: 1,
+                complement: "casa"
+                district: "Teste",
+                city: "Blumenau",
+                state: "SC",
+                postalcode: 89000000
+              },
+              {
+                street: "Servidão Teste",
+                number: 2,
+                complement: "apto 10"
+                district: "Teste",
+                city: "Blumenau",
+                state: "SC",
+                postalcode: 89000000
               }
             ],
-            bens: [
+            goods: [
               {
-                tipo: "Veiculo",
-                marca: "Honda",
-                modelo: "Civic",
-                valor: 20000
+                type: "Veiculo",
+                brand: "Honda",
+                model: "Civic",
+                value: 20000
               },
               {
-                tipo: "Imóvel",
-                modelo: "Casa",
-                endereco: {
-                  rua: "Servidão Teste",
-                  numero: 1,
-                  complemento: "casa"
-                  bairro: "Teste",
-                  cidade: "Blumenau",
-                  estado: "SC",
-                  cep: 89000000
+                type: "Imóvel",
+                model: "Casa",
+                address: {
+                  street: "Servidão Teste",
+                  number: 1,
+                  complement: "casa"
+                  district: "Teste",
+                  city: "Blumenau",
+                  state: "SC",
+                  postalcode: 89000000
                 },
-                valor: 200000
+                value: 200000
               },
               {
-                tipo: "Imóvel",
-                modelo: "Apto",
-                endereco: {
-                  rua: "Servidão Teste",
-                  numero: 2,
-                  complemento: "apto 10"
-                  bairro: "Teste",
-                  cidade: "Blumenau",
-                  estado: "SC",
-                  cep: 89000000
+                type: "Imóvel",
+                model: "Apto",
+                address: {
+                  street: "Servidão Teste",
+                  number: 2,
+                  complement: "apto 10"
+                  district: "Teste",
+                  city: "Blumenau",
+                  state: "SC",
+                  postalcode: 89000000
                 },
-                valor: 200000
+                value: 200000
               }
             ],
             renda: [
               {
-                principal: true,
-                responsavel: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
-                fonte: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
-                origem: "Aluguel",
-                valor: 1000
+                main: true,
+                responsible: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
+                source: ObjectId("xxxxxxxxxxxxxxxxxxxxxxx"),
+                origin: "Aluguel",
+                value: 1000
               }
             ]
           }
